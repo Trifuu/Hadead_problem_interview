@@ -15,7 +15,7 @@ To compile:
 g++ encode.cc -o encode
 g++ decode.cc -o decode
 
-To run:\
+To run:
 - ./encode <example.dat >out.bin
 
 - ./decode <out.bin >out.txt
