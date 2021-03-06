@@ -12,12 +12,11 @@ Don't load in the decode program a file that was not created with the encode one
 You can compile and test the program using the test.sh script or you can compile it on your own.
 
 To compile:
-g++ encode.cc -o encode
-g++ decode.cc -o decode
+- g++ encode.cc -o encode
+- g++ decode.cc -o decode
 
 To run:
 - ./encode <example.dat >out.bin
-
 - ./decode <out.bin >out.txt
 
 To check if the encode -> decode works you can call the diff command:
