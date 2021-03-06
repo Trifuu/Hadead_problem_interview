@@ -1,4 +1,4 @@
-The program encode and decode an input file with symbols.
+The program encode and decode an input file that contain symbols.
 
 The encription works by replacing the symbols with an index 
 from an unique symbols table that is created based on the input file.
