@@ -80,7 +80,8 @@ void write_to_stdout(const std::string &symbol_table, const std::string &out,
     size_t length = input.length();
 
     for (int i = 0; i < size; i++) {
-        std::cout.put((char)(length >> 8 * i) & 0xff);
+        char chunk = length >> (8 * i) & 0xff;
+        std::cout.put(chunk);
     }
 
     // write encoded array of symbols to stdout
