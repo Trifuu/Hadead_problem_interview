@@ -10,9 +10,10 @@ void read_symbol_table(std::string &symbol_table) {
 
 void decode(const std::string &symbol_table, std::string &decode_message) {
     char character;
-    
     int size = sizeof(size_t);
     size_t length = 0;
+    size_t decode_message_length = decode_message.length();
+
     for (int i = 0; i < size; i++) {
         std::cin.get(character);
         length = character << 8 * i & (0xff << 8 * i) | length;
@@ -20,16 +21,16 @@ void decode(const std::string &symbol_table, std::string &decode_message) {
 
     decode_message = std::string(length, ' ');
     // decode the message
-    for (int i = 0; i < decode_message.length() - 1; i += 2) {
+    for (size_t i = 0; i < decode_message_length - 1; i += 2) {
 
         std::cin.get(character);
         decode_message[i] = symbol_table[(character >> 4) & 0xf];
         decode_message[i + 1] = symbol_table[character & 0xf];
     }
     // if the message have an odd length decode the last character separately
-    if (decode_message.length() % 2 == 1) {
+    if (decode_message_length % 2 == 1) {
         std::cin.get(character);
-        decode_message[decode_message.length() - 1] = symbol_table[character & 0xf];
+        decode_message[decode_message_length - 1] = symbol_table[character & 0xf];
     }
 }
 

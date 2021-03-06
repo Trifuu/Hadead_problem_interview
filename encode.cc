@@ -11,8 +11,8 @@ void read_all_symbols(std::string &input) {
 }
 
 void create_symbol_table(const std::string &input, std::string &symbol_table) {
-    int input_length = input.length();
-    int symbol_table_length = input.length();
+    size_t input_length = input.length();
+    size_t symbol_table_length = input.length();
     int i, j;
 
     for (i = 0; i < input_length; i++) {
@@ -34,7 +34,7 @@ void create_symbol_table(const std::string &input, std::string &symbol_table) {
 
 int search_symbol_index(const char &input, const std::string &symbol_table) {
     int i;
-    int symbol_table_length = symbol_table.length();
+    size_t symbol_table_length = symbol_table.length();
 
     for (i = 0; i < symbol_table_length; i++) {
             if (symbol_table[i] == input) {
@@ -47,9 +47,10 @@ int search_symbol_index(const char &input, const std::string &symbol_table) {
 void encode(const std::string &input, const std::string &symbol_table,
             std::string &out) {
     char encoded_character;
+    size_t input_length = input.length();
 
     //create the output encoded array
-    for (int j = 0; j < input.length() - 1; j += 2) {
+    for (size_t j = 0; j < input_length - 1; j += 2) {
         int k1, k2;
         k1 = search_symbol_index(input[j], symbol_table);
         k2 = search_symbol_index(input[j + 1], symbol_table);
@@ -62,8 +63,8 @@ void encode(const std::string &input, const std::string &symbol_table,
     }
 
     //if the message have an odd length encode the last character separately
-    if (input.length() % 2 == 1) {
-        int k = search_symbol_index(input[input.length() - 1], symbol_table);
+    if (input_length % 2 == 1) {
+        int k = search_symbol_index(input[input_length - 1], symbol_table);
         encoded_character = k & 0xf;
         out.push_back(encoded_character);
     }
@@ -80,7 +81,8 @@ void write_to_stdout(const std::string &symbol_table, const std::string &out,
     size_t length = input.length();
 
     for (int i = 0; i < size; i++) {
-        std::cout.put((char)(length >> 8 * i) & 0xff);
+        char chunk = length >> (8 * i) & 0xff;
+        std::cout.put(chunk);
     }
 
     // write encoded array of symbols to stdout

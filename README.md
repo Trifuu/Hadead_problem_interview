@@ -11,8 +11,8 @@ Don't load in the decode program a file that was not created with the encode one
 
 You can compile and test the program using the test.sh script
 - ./test.sh example.dat
-or you can compile it on your own.
 
+Or you can compile it on your own.
 To compile:
 - g++ encode.cc -o encode
 - g++ decode.cc -o decode
