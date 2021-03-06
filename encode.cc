@@ -1,9 +1,7 @@
 #include <iostream>
 
-#define MAXIMUM_UNIQUE_SYMBOLS 16
-
 void read_all_symbols(std::string &input) {
-    while(true) {
+    while (true) {
         input.push_back(std::cin.get());
         if (std::cin.eof()) {
             input.pop_back();
@@ -25,7 +23,7 @@ void create_symbol_table(const std::string &input, std::string &symbol_table) {
         }
         if (j == symbol_table_length) {
             //stop the search when it exceed the maximum of unique symbols
-            if(symbol_table_length == MAXIMUM_UNIQUE_SYMBOLS) {
+            if(symbol_table_length == 16) {
                 std:: cerr << "Error: The number of unique symbols is > 16." << std::endl;
                 exit(1);
             }
@@ -36,8 +34,9 @@ void create_symbol_table(const std::string &input, std::string &symbol_table) {
 
 int search_symbol_index(const char &input, const std::string &symbol_table) {
     int i;
+    int symbol_table_length = symbol_table.length();
 
-    for (i = 0; i < symbol_table.length(); i++) {
+    for (i = 0; i < symbol_table_length; i++) {
             if (symbol_table[i] == input) {
                 return i;
             }
@@ -64,8 +63,7 @@ void encode(const std::string &input, const std::string &symbol_table,
 
     //if the message have an odd length encode the last character separately
     if (input.length() % 2 == 1) {
-        int k;
-        k = search_symbol_index(input[input.length() - 1], symbol_table);
+        int k = search_symbol_index(input[input.length() - 1], symbol_table);
         encoded_character = k & 0xf;
         out.push_back(encoded_character);
     }
@@ -82,7 +80,7 @@ void write_to_stdout(const std::string &symbol_table, const std::string &out,
     size_t length = input.length();
 
     for (int i = 0; i < size; i++) {
-        std::cout.put((char)(length >> 8*i) & 0xff);
+        std::cout.put((char)(length >> 8 * i) & 0xff);
     }
 
     // write encoded array of symbols to stdout
