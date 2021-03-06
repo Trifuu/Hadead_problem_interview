@@ -1,32 +1,44 @@
 #include <iostream>
 
-char* symbol_table = nullptr;
-char symbol_table_length = 0;
+void read_symbol_table(std::string &symbol_table) {
+    char symbol_table_length = 0;
+    std::cin.get(symbol_table_length);
+
+    symbol_table = std::string(symbol_table_length, ' ');
+    std::cin.read(&symbol_table[0], symbol_table_length);
+}
+
+void decode(const std::string &symbol_table, std::string &decode_message) {
+    char character;
+
+    std::cin.get(character);
+    decode_message = std::string((int) character, ' ');
+    
+    //decode the message
+    for (int i = 0; i < decode_message.length() - 1; i += 2) {
+
+        std::cin.get(character);
+        decode_message[i] = symbol_table[(character >> 4) & 0xf];
+        decode_message[i + 1] = symbol_table[character & 0xf];
+    }
+    //if the message have an odd length decode the last character separately
+    if ( decode_message.length() % 2 == 1){
+        std::cin.get(character);
+        decode_message[decode_message.length() - 1] = symbol_table[character & 0xf];
+    }
+}
 
 int main() {
-    symbol_table = new char[1024];
-
-    std::cin.get(symbol_table_length);
-    std::cin.read(symbol_table, symbol_table_length);
+    std::string symbol_table, decode_message;
     
-    char in;
-    int len,i;
-    std::cin.get(in);
-    len = (int) in;
+    //read the unique symbol table
+    read_symbol_table(symbol_table);
 
-    for (i = 0; i < len - 1; i += 2) {
-        char in;
-        std::cin.get(in);
-
-        std::cout.put(symbol_table[(in >> 4) & 0xf]);
-        std::cout.put(symbol_table[in & 0xf]);
-    }
-    if ( i == len - 1){
-        std::cin.get(in);
-        std::cout.put(symbol_table[in & 0xf]);
-    }
+    //decode the message using the symbol table
+    decode(symbol_table, decode_message);
     
+    //print the decoded message to stdout
+    std::cout.write(decode_message.c_str(), decode_message.length());
     
-    delete []symbol_table;
     return 0;
 }
