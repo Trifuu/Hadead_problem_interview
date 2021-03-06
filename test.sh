@@ -9,6 +9,6 @@ set -eu
     make
 )
 infile=$1
-./build/encode <$infile >out.bin || true
-./build/decode <out.bin >out.txt || true
+./build/encode <$infile >out.bin
+./build/decode <out.bin >out.txt
 diff $infile out.txt

@@ -30,7 +30,7 @@ void create_symbol_table(const std::string &input, std::string &symbol_table) {
             //stop the search when it exceed the maximum of unique symbols
             if(symbol_table.length() == MAXIMUM_UNIQUE_SYMBOLS)
             {
-                std:: cerr << "Error: The number of unique symbols is > 16.";
+                std:: cerr << "Error: The number of unique symbols is > 16." << std::endl;
                 exit(1);
             }
 
@@ -84,8 +84,13 @@ void write_to_stdout(const std::string &symbol_table, const std::string &out,
     std::cout.write(symbol_table.c_str(), symbol_table.length());
 
     //write to stdout the length of the input array of symbols
-    std::cout.put(input.length());
-
+    int size = sizeof(size_t);
+    size_t length = input.length();
+    for( int i = 0; i< size; i++)
+    {
+        std::cout.put((char)(length >> 8*i) & 0xff);
+    }
+    
     //write encoded array of symbols to stdout
     std::cout.write(out.c_str(), (input.length() + 1) / 2);
 }
