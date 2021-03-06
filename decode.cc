@@ -12,14 +12,15 @@ void decode(const std::string &symbol_table, std::string &decode_message) {
     char character;
     int size = sizeof(size_t);
     size_t length = 0;
-    size_t decode_message_length = decode_message.length();
-
+    
     for (int i = 0; i < size; i++) {
         std::cin.get(character);
         length = character << 8 * i & (0xff << 8 * i) | length;
     }
 
     decode_message = std::string(length, ' ');
+    size_t decode_message_length = decode_message.length();
+
     // decode the message
     for (size_t i = 0; i < decode_message_length - 1; i += 2) {
 

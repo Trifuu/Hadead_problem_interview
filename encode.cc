@@ -12,18 +12,17 @@ void read_all_symbols(std::string &input) {
 
 void create_symbol_table(const std::string &input, std::string &symbol_table) {
     size_t input_length = input.length();
-    size_t symbol_table_length = input.length();
     int i, j;
 
     for (i = 0; i < input_length; i++) {
-        for (j = 0; j < symbol_table_length; j++) {
+        for (j = 0; j < symbol_table.length(); j++) {
             if (symbol_table[j] == input[i]) {
                 break;
             }
         }
-        if (j == symbol_table_length) {
+        if (j == symbol_table.length()) {
             //stop the search when it exceed the maximum of unique symbols
-            if(symbol_table_length == 16) {
+            if(symbol_table.length() == 16) {
                 std:: cerr << "Error: The number of unique symbols is > 16." << std::endl;
                 exit(1);
             }
