@@ -5,9 +5,11 @@ touch log.txt
 mkdir tests
 
 #number of symbols that will exist in the input file
+#ex: number_of_total_symbols=(1000 1233 13234343)
 number_of_total_symbols=(100 10001)
 
 #number of unique symbols that will exist in the input file that will have "number_of_total_symbols" symbols
+#ex: number_of_unique_symbols=(100 2 9 18 6)
 number_of_unique_symbols=(1 5 16)
 
 letters=({A..Z})
