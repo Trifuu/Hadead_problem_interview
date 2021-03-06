@@ -15,14 +15,14 @@ To compile:
 g++ encode.cc -o encode
 g++ decode.cc -o decode
 
-To run:
-./encode <example.dat >out.bin
+To run:\
+- ./encode <example.dat >out.bin
 
-./decode <out.bin >out.txt
+- ./decode <out.bin >out.txt
 
 To check if the encode -> decode works you can call the diff command:
 
-diff out.txt example.dat
+- diff out.txt example.dat
 
 If the diff print something, there is a problem with the encription.
 
@@ -31,7 +31,7 @@ you can use the script.sh file.
 
 To run the script.sh you just need to call it:
 
-./script.sh
+- ./script.sh
 
 The file will create it's own tests and at the end will delete all the files that were created and keeps only
 log.txt if there were errors in one of the tests.
